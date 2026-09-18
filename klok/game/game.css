@@ -1,0 +1,249 @@
+/*
+ * FAMOUSDA — THE FINAL JOURNEY
+ * Game shell CSS
+ * Handles: full-screen canvas, loading screen, touch controls, scanlines.
+ */
+
+/* ── Google Fonts (pixel font for loading screen) ─────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* ── Reset ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #050510;
+  font-family: 'Courier New', Courier, monospace;
+  /* Prevent any browser-native pan/zoom while game canvas is focused */
+  touch-action: none;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Game canvas ──────────────────────────────────────────────────────────── */
+#gameCanvas {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Pixel-perfect rendering — no bilinear blur on scaled canvas */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  cursor: default;
+}
+
+/* ── Scanlines retro overlay ──────────────────────────────────────────────── */
+#scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+}
+
+/* ── Loading screen ───────────────────────────────────────────────────────── */
+#loadingScreen {
+  position: fixed;
+  inset: 0;
+  background: #050510;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  color: #FFD700;
+  font-family: 'Courier New', monospace;
+  transition: opacity 0.5s ease;
+}
+
+#loadingScreen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#loadingTitle {
+  font-size: clamp(28px, 6vw, 48px);
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 20px #FFD700;
+  margin-bottom: 12px;
+}
+
+#loadingSubtitle {
+  font-size: clamp(10px, 2vw, 14px);
+  color: #A0B0C0;
+  margin-bottom: 40px;
+}
+
+.loading-bar-wrap {
+  width: min(320px, 80vw);
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #FFD700;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #C8A020, #FFD700);
+  border-radius: 5px;
+  animation: loadAnim 1.4s ease-out forwards;
+}
+
+@keyframes loadAnim {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+.loading-hint {
+  margin-top: 20px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.08em;
+}
+
+/* ── Touch controls ───────────────────────────────────────────────────────── */
+/*
+ * Visibility is controlled by JS (_updateTouchVisibility) based on
+ * navigator.maxTouchPoints — more reliable than CSS pointer media query.
+ * Default: hidden. JS sets display:flex on touch devices.
+ */
+#touchControls {
+  display: none;               /* JS overrides this on touch devices */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* Safe area padding for notched phones (iPhone X etc.) */
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  padding-left:  max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+  /* Place controls in left/right thumb zones */
+  align-items: flex-end;
+  justify-content: space-between;
+  pointer-events: none;        /* container itself is pass-through */
+  z-index: 20;
+  /* Gradient fog at bottom so controls don't fully obscure the game */
+  background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%);
+  height: 160px;
+}
+
+/* Left D-pad cluster */
+.touch-dpad {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  padding-bottom: 12px;
+}
+
+/* Right action cluster */
+.touch-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: flex-end;
+  padding-bottom: 12px;
+}
+
+/* ── Base button style ────────────────────────────────────────────────────── */
+.touch-btn {
+  /* All buttons are interactive */
+  pointer-events: auto;
+  /* Size — large enough for thumbs (min 44px per WCAG, we use 64) */
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  background: rgba(8, 8, 30, 0.72);
+  color: #FFD700;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Subtle depth */
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  /* Smooth press animation */
+  transition: background 0.08s, transform 0.07s, box-shadow 0.07s;
+  /* Backdrop blur for subtle glass effect on supported browsers */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.touch-btn:active {
+  background: rgba(255, 215, 0, 0.25);
+  transform: scale(0.91) translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Jump button — round, blue accent */
+.touch-btn--jump {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  font-size: 24px;
+  background: rgba(15, 30, 70, 0.80);
+  border-color: rgba(80, 160, 255, 0.65);
+  color: #88CCFF;
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.45),
+    0 0 14px rgba(80, 160, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.touch-btn--jump:active {
+  background: rgba(80, 160, 255, 0.3);
+}
+
+/* Interact / E button — purple accent */
+.touch-btn--interact {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  font-size: 16px;
+  background: rgba(30, 10, 55, 0.80);
+  border-color: rgba(180, 130, 255, 0.60);
+  color: #C8A0FF;
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.45),
+    0 0 10px rgba(180, 130, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.touch-btn--interact:active {
+  background: rgba(180, 130, 255, 0.3);
+}
+
+/* ── Small phone adjustments (≤ 380px wide) ───────────────────────────────── */
+@media (max-width: 380px) {
+  .touch-btn         { width: 56px; height: 56px; font-size: 18px; }
+  .touch-btn--jump   { width: 64px; height: 64px; font-size: 20px; }
+  .touch-btn--interact { width: 52px; height: 52px; }
+  #touchControls     { height: 140px; }
+}
+
+/* ── Landscape phone — tighter padding ────────────────────────────────────── */
+@media (max-height: 440px) {
+  #touchControls     { height: 110px; }
+  .touch-btn         { width: 52px; height: 52px; font-size: 18px; }
+  .touch-btn--jump   { width: 60px; height: 60px; }
+  .touch-btn--interact { width: 48px; height: 48px; }
+}

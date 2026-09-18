@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Famosda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- CSS terpisah: lihat style.css (harus ada di folder yang sama dengan file ini) -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#home" class="logo">
+      <span class="logo-avatar"></span>
+      <span class="logo-text">Famosda</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About us</a>
+      <a href="#teacher" class="nav-link">Teacher</a>
+      <a href="#students" class="nav-link">Student's</a>
+      <a href="#moments" class="nav-link">Moments</a>
+    </nav>
+
+    <div class="header-actions">
+      <!-- ===== Dropdown Musik (5 slot lagu) ===== -->
+      <div class="header-dropdown">
+        <button class="icon-btn icon-btn--accent" id="musicToggle" aria-label="Musik" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+        </button>
+        <div class="dropdown-panel" id="musicPanel">
+          <p class="dropdown-title">Daftar Lagu</p>
+          <ul class="song-list">
+            <!-- ===== EDIT MUSIK DI SINI =====
+                 Ganti src="" pada tiap <audio> dengan path file mp3 asli,
+                 contoh: src="musik/lagu1.mp3". Ganti juga teks "Lagu 1" dst. -->
+            <li class="song-item">
+              <button class="song-play" aria-label="Putar Lagu 1">▶</button>
+              <span class="song-name">Lagu 1</span>
+              <audio src="" preload="none"></audio>
+            </li>
+            <li class="song-item">
+              <button class="song-play" aria-label="Putar Lagu 2">▶</button>
+              <span class="song-name">Lagu 2</span>
+              <audio src="" preload="none"></audio>
+            </li>
+            <li class="song-item">
+              <button class="song-play" aria-label="Putar Lagu 3">▶</button>
+              <span class="song-name">Lagu 3</span>
+              <audio src="" preload="none"></audio>
+            </li>
+            <li class="song-item">
+              <button class="song-play" aria-label="Putar Lagu 4">▶</button>
+              <span class="song-name">Lagu 4</span>
+              <audio src="" preload="none"></audio>
+            </li>
+            <li class="song-item">
+              <button class="song-play" aria-label="Putar Lagu 5">▶</button>
+              <span class="song-name">Lagu 5</span>
+              <audio src="" preload="none"></audio>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ===== Dropdown Game (3 mode permainan) ===== -->
+      <div class="header-dropdown">
+        <button class="icon-btn icon-btn--dark" id="gameToggle" aria-label="Game" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="4"></rect><path d="M7 10v4M5 12h4"></path><circle cx="16" cy="10.5" r="1"></circle><circle cx="18.5" cy="13" r="1"></circle></svg>
+        </button>
+        <div class="dropdown-panel" id="gamePanel">
+          <p class="dropdown-title">Mode Permainan</p>
+          <div class="game-modes">
+            <!-- Mode 1: Game platformer petualangan utama -->
+            <a href="game/index.html" class="game-mode" target="_blank" rel="noopener noreferrer">
+              <span class="game-mode-icon">🎮</span>
+              <span>The Final Journey</span>
+            </a>
+            <!-- Mode 2 & 3: reserved for future games -->
+            <a href="#" class="game-mode" data-future="true">
+              <span class="game-mode-icon">🕹️</span>
+              <span>Segera Hadir</span>
+            </a>
+            <a href="#" class="game-mode" data-future="true">
+              <span class="game-mode-icon">🏆</span>
+              <span>Segera Hadir</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="hero">
+    <div class="wrap">
+      <div class="hero-box">
+        <h1 class="hero-title">FAMOSDA</h1>
+        <p class="hero-subtitle">Kenangan, cerita, dan wajah-wajah yang membuat kelas ini terasa seperti rumah.</p>
+        <!-- id="heroBtn" dipakai script.js untuk menampilkan alert sambutan -->
+        <a href="#students" id="heroBtn" class="btn btn-primary">Lihat Semua Siswa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT US ================= -->
+  <section id="about" class="about-section">
+    <div class="wrap">
+      <p class="section-eyebrow">Tentang Kami</p>
+      <h2 class="section-title">About us</h2>
+      <p class="section-lead">Sedikit cerita tentang perjalanan kelas kami — ganti teks dan foto di bawah ini sesuai kisah kalian.</p>
+
+      <div class="about-grid">
+        <div class="polaroid">
+          <div class="polaroid-shadow"></div>
+          <div class="polaroid-card">
+            <!-- ===== EDIT FOTO DI SINI =====
+                 Ganti src="" dengan path foto kelas asli, contoh: src="foto/kelas.jpg" -->
+            <img class="content-image" src="" alt="Foto kelas Famosda" onerror="this.style.display='none'">
+          </div>
+        </div>
+        <div class="about-blocks">
+          <div class="about-block about-block--green">
+  Ganti teks ini dengan deskripsi lengkap tentang kelas Famosda, momen-momen penting, dan hal yang membuat kalian bangga menjadi bagian dari kelas ini.
+</div>
+
+<div class="about-block about-block--pink">
+  Cerita singkat kelas / motto
+</div>
+
+<a href="#" target="_blank" rel="noopener noreferrer"
+   class="about-block about-block--sky about-block--link">
+  <svg viewBox="0 0 24 24" width="20" height="20"
+       fill="none" stroke="currentColor" stroke-width="1.8"
+       stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+    <circle cx="12" cy="12" r="4"></circle>
+    <circle cx="17.5" cy="6.5" r="1"></circle>
+  </svg>
+  <span>@famosda_class</span>
+</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEACHER ================= -->
+  <section id="teacher" class="teacher-section">
+    <div class="wrap">
+      <p class="section-eyebrow">Wali Kelas</p>
+      <h2 class="section-title">Teacher</h2>
+      <p class="section-lead">Sosok yang membimbing kami — sedikit apresiasi untuk wali kelas tercinta.</p>
+
+      <div class="teacher-grid">
+        <div class="polaroid">
+          <div class="polaroid-shadow"></div>
+          <div class="polaroid-card">
+            <!-- ===== EDIT FOTO DI SINI =====
+                 Ganti src="" dengan path foto wali kelas asli, contoh: src="foto/wali-kelas.jpg" -->
+            <img class="content-image" src="" alt="Foto wali kelas" onerror="this.style.display='none'">
+          </div>
+        </div>
+        <div class="teacher-blocks">
+          <div class="teacher-block teacher-block--orange">Nama Wali Kelas</div>
+          <div class="teacher-block teacher-block--olive">Ganti dengan pesan atau ucapan terima kasih untuk wali kelas.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STUDENTS / CONTENT GRID ================= -->
+  <section id="students" class="students-section">
+    <div class="wrap">
+      <p class="section-eyebrow">Kenali Kami</p>
+      <h2 class="section-title">Student's</h2>
+      <p class="section-lead">Cari nama siswa, lalu ganti setiap gambar placeholder dengan foto asli.</p>
+
+      <div class="search-wrap">
+        <input type="text" id="studentSearch" placeholder="Cari nama siswa..." aria-label="Cari nama siswa">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+
+      <!--
+        ===== EDIT FOTO SISWA DI SINI =====
+        Setiap kartu berisi <img class="content-image">.
+        1. Ganti src="" dengan path foto asli, contoh: src="foto/siswa1.jpg"
+        2. Ganti alt="Siswa 1" dan data-name="Siswa 1" (di <div class="content-card">)
+           dengan nama siswa yang sebenarnya — dipakai juga oleh kolom pencarian.
+        3. Tambah atau hapus blok .content-card sesuai jumlah siswa,
+           grid akan otomatis menyesuaikan (CSS Grid responsive).
+      -->
+      <div class="content-grid" id="contentGrid">
+        <div class="content-card" data-name="Siswa 1" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 1" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 1</span>
+        </div>
+        <div class="content-card" data-name="Siswa 2" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 2" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 2</span>
+        </div>
+        <div class="content-card" data-name="Siswa 3" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 3" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 3</span>
+        </div>
+        <div class="content-card" data-name="Siswa 4" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 4" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 4</span>
+        </div>
+        <div class="content-card" data-name="Siswa 5" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 5" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 5</span>
+        </div>
+        <div class="content-card" data-name="Siswa 6" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 6" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 6</span>
+        </div>
+        <div class="content-card" data-name="Siswa 7" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 7" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 7</span>
+        </div>
+        <div class="content-card" data-name="Siswa 8" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 8" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 8</span>
+        </div>
+        <div class="content-card" data-name="Siswa 9" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 9" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 9</span>
+        </div>
+        <div class="content-card" data-name="Siswa 10" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 10" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 10</span>
+        </div>
+        <div class="content-card" data-name="Siswa 11" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 11" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 11</span>
+        </div>
+        <div class="content-card" data-name="Siswa 12" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 12" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 12</span>
+        </div>
+        <div class="content-card" data-name="Siswa 13" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 13" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 13</span>
+        </div>
+        <div class="content-card" data-name="Siswa 14" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 14" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 14</span>
+        </div>
+        <div class="content-card" data-name="Siswa 15" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 15" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 15</span>
+        </div>
+        <div class="content-card" data-name="Siswa 16" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 16" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 16</span>
+        </div>
+        <div class="content-card" data-name="Siswa 17" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 17" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 17</span>
+        </div>
+        <div class="content-card" data-name="Siswa 18" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 18" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 18</span>
+        </div>
+        <div class="content-card" data-name="Siswa 19" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 19" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 19</span>
+        </div>
+        <div class="content-card" data-name="Siswa 20" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 20" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 20</span>
+        </div>
+        <div class="content-card" data-name="Siswa 21" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 21" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 21</span>
+        </div>
+        <div class="content-card" data-name="Siswa 22" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 22" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 22</span>
+        </div>
+        <div class="content-card" data-name="Siswa 23" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 23" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 23</span>
+        </div>
+        <div class="content-card" data-name="Siswa 24" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 24" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 24</span>
+        </div>
+        <div class="content-card" data-name="Siswa 25" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 25" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 25</span>
+        </div>
+        <div class="content-card" data-name="Siswa 26" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 26" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 26</span>
+        </div>
+        <div class="content-card" data-name="Siswa 27" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 27" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 27</span>
+        </div>
+        <div class="content-card" data-name="Siswa 28" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 28" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 28</span>
+        </div>
+        <div class="content-card" data-name="Siswa 29" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 29" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 29</span>
+        </div>
+        <div class="content-card" data-name="Siswa 30" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 30" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 30</span>
+        </div>
+        <div class="content-card" data-name="Siswa 31" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 31" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 31</span>
+        </div>
+        <div class="content-card" data-name="Siswa 32" data-quote="" data-img1="" data-img2="" data-img3="" tabindex="0" role="button" aria-haspopup="dialog">
+          <img class="content-image" src="" alt="Siswa 32" onerror="this.style.display='none'">
+          <span class="content-caption">Siswa 32</span>
+        </div>
+      </div>
+
+      <p class="no-results" id="noResults">Tidak ada siswa dengan nama tersebut.</p>
+    </div>
+  </section>
+
+  <!-- ================= MOMENTS (CAROUSEL FOTO & VIDEO) ================= -->
+  <section id="moments" class="moments-section">
+    <div class="wrap">
+      <p class="section-eyebrow">Kilas Balik</p>
+      <h2 class="section-title">Moments</h2>
+      <p class="section-lead">6 foto dan 3 video kenangan kelas kami — geser pakai tombol panah atau swipe langsung di layar.</p>
+
+      <div class="moments-carousel">
+        <div class="carousel-stage">
+        <div class="carousel-viewport" id="momentsViewport">
+          <!--
+            ===== EDIT FOTO & VIDEO DI SINI =====
+            Total ada 9 slot: 6 foto (data-type="photo") + 3 video (data-type="video").
+            - Untuk foto: ganti src="" pada <img class="content-image"> dengan path foto asli,
+              contoh: src="foto/momen1.jpg". Ganti juga alt dan caption di bawahnya.
+            - Untuk video: ganti src="" pada <source> di dalam <video> dengan path video asli,
+              contoh: src="video/momen3.mp4". poster="" bisa diisi gambar thumbnail (opsional).
+            - Urutan/isi boleh ditukar bebas, jumlah slot boleh ditambah/dikurangi —
+              carousel akan otomatis menyesuaikan.
+          -->
+          <div class="carousel-track" id="momentsTrack">
+
+            <div class="moment-item" data-type="photo">
+              <div class="content-card moment-card">
+                <img class="content-image" src="" alt="Momen 1" onerror="this.style.display='none'">
+                <span class="content-caption">Momen 1</span>
+              </div>
+            </div>
+
+            <div class="moment-item" data-type="photo">
+              <div class="content-card moment-card">
+                <img class="content-image" src="" alt="Momen 2" onerror="this.style.display='none'">
+                <span class="content-caption">Momen 2</span>
+              </div>
+            </div>
+
+            <div class="moment-item" data-type="video">
+              <div class="content-card moment-card">
+                <span class="moment-badge">🎬 Video</span>
+                <video class="content-image" controls preload="none" poster="">
+                  <source src="" type="video/mp4">
+                </video>
+                <span class="content-caption">Momen 3</span>
+              </div>
+            </div>
+
+            <div class="moment-item" data-type="photo">
+              <div class="content-card moment-card">
+                <img class="content-image" src="" alt="Momen 4" onerror="this.style.display='none'">
+                <span class="content-caption">Momen 4</span>
+              </div>
+            </div>
+
+            <div class="moment-item" data-type="photo">
+              <div class="content-card moment-card">
+                <img class="content-image" src="" alt="Momen 5" onerror="this.style.display='none'">
+                <span class="content-caption">Momen 5</span>
+              </div>
+            </div>
+
+            <div class="moment-item" data-type="video">
+              <div class="content-card moment-card">
+                <span class="moment-badge">🎬 Video</span>
+                <video class="content-image" controls preload="none" poster="">
+                  <source src="" type="video/mp4">
+                </video>
+                <span class="content-caption">Momen 6</span>
+              </div>
+            </div>
+
+            <div class="moment-item" data-type="photo">
+              <div class="content-card moment-card">
+                <img class="content-image" src="" alt="Momen 7" onerror="this.style.display='none'">
+                <span class="content-caption">Momen 7</span>
+              </div>
+            </div>
+
+            <div class="moment-item" data-type="photo">
+              <div class="content-card moment-card">
+                <img class="content-image" src="" alt="Momen 8" onerror="this.style.display='none'">
+                <span class="content-caption">Momen 8</span>
+              </div>
+            </div>
+
+            <div class="moment-item" data-type="video">
+              <div class="content-card moment-card">
+                <span class="moment-badge">🎬 Video</span>
+                <video class="content-image" controls preload="none" poster="">
+                  <source src="" type="video/mp4">
+                </video>
+                <span class="content-caption">Momen 9</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <button class="carousel-arrow carousel-arrow--prev" id="momentsPrev" aria-label="Momen sebelumnya">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+        </button>
+        <button class="carousel-arrow carousel-arrow--next" id="momentsNext" aria-label="Momen berikutnya">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+        </button>
+        </div>
+      </div>
+
+      <div class="carousel-dots" id="momentsDots"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Famosda</strong> &mdash; dibuat dengan &hearts; untuk kelas kami. &copy; <span id="year"></span></p>
+  </div>
+</footer>
+
+<!-- ===== Modal Sambutan (custom, menggantikan alert bawaan browser) ===== -->
+<div class="modal-overlay" id="welcomeModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Tutup">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+    </button>
+    <div class="modal-image-wrap">
+      <!-- ===== EDIT FOTO DI SINI =====
+           Ganti src="" dengan foto sambutan asli, contoh: src="foto/sambutan.jpg" -->
+      <img class="modal-image" src="" alt="Foto sambutan Famosda" onerror="this.style.display='none'">
+    </div>
+    <h3 class="modal-title">Selamat Datang di Famosda!</h3>
+    <p class="modal-text">Terima kasih sudah mampir ke halaman kelas kami. Yuk kenalan lebih jauh dengan semua siswa di bawah.</p>
+    <button class="btn btn-primary modal-ok" id="modalOk">Oke</button>
+  </div>
+</div>
+
+<!-- ===== Modal Detail Siswa (custom, 1 struktur untuk semua kartu) =====
+     Modal tunggal ini dipakai untuk SEMUA kartu di #contentGrid.
+     Saat sebuah .content-card diklik, script.js membaca atribut data-*
+     kartu tersebut (data-name, data-quote, data-img1, data-img2, data-img3)
+     lalu mengisi ulang isi modal ini secara dinamis — bukan bikin 32 modal
+     terpisah.
+     ===== EDIT DATA SISWA DI SINI =====
+     Isi atribut data-* pada tiap <div class="content-card" data-name="..."> di
+     bagian Students di atas:
+       - data-quote  : kesan & pesan siswa, contoh: data-quote="Terima kasih Famosda!"
+       - data-img1   : foto utama/profil, contoh: data-img1="foto/siswa1-profil.jpg"
+       - data-img2   : foto momen/bebas ke-1, contoh: data-img2="foto/siswa1-momen1.jpg"
+       - data-img3   : foto momen/bebas ke-2, contoh: data-img3="foto/siswa1-momen2.jpg"
+     Kalau salah satu data-imgN dikosongkan, slot itu otomatis disembunyikan
+     (kotak placeholder ungu tetap tampil, foto tidak dipaksa muncul rusak). -->
+<div class="modal-overlay" id="studentModal">
+  <div class="modal-box modal-box--student">
+    <button class="modal-close" id="studentModalClose" aria-label="Tutup">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+    </button>
+
+    <div class="student-gallery">
+      <div class="gallery-slot gallery-slot--main">
+        <img class="student-gallery-img" id="studentImg1" src="" alt="" onerror="this.style.display='none'">
+      </div>
+      <div class="gallery-slot gallery-slot--sub">
+        <img class="student-gallery-img" id="studentImg2" src="" alt="" onerror="this.style.display='none'">
+      </div>
+      <div class="gallery-slot gallery-slot--sub">
+        <img class="student-gallery-img" id="studentImg3" src="" alt="" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <p class="student-quote" id="studentQuote">&ldquo;Kesan &amp; pesan siswa akan muncul di sini.&rdquo;</p>
+    <h3 class="student-name" id="studentName">Nama Siswa</h3>
+  </div>
+</div>
+
+<!-- JS terpisah: lihat script.js (harus ada di folder yang sama dengan file ini) -->
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#050510">
+  <title>FAMOUSDA — The Final Journey</title>
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+  <!-- Loading screen (HTML layer, hidden once game starts) -->
+  <div id="loadingScreen">
+    <div id="loadingTitle">FAMOUSDA</div>
+    <div id="loadingSubtitle">— THE FINAL JOURNEY —</div>
+    <div class="loading-bar-wrap">
+      <div class="loading-bar-fill"></div>
+    </div>
+    <p class="loading-hint">XII IPS 2 &nbsp;·&nbsp; Sedang dimuat...</p>
+  </div>
+
+  <!-- Scanlines overlay (retro pixel feel) -->
+  <div id="scanlines"></div>
+
+  <!-- Game canvas — the entire game is rendered here -->
+  <canvas id="gameCanvas" aria-label="FAMOUSDA — The Final Journey game canvas"></canvas>
+
+  <!--
+    =====================================================================
+    Touch controls
+    Positioned over the canvas, only visible on touch devices (CSS).
+    Buttons are connected to the game's touch input system (game.js).
+    =====================================================================
+  -->
+  <div id="touchControls" aria-label="Kontrol sentuh" role="toolbar">
+    <!-- Left side: D-pad (left/right movement) -->
+    <div class="touch-dpad">
+      <button class="touch-btn" id="btn-left"  aria-label="Jalan kiri" title="Kiri">◀</button>
+      <button class="touch-btn" id="btn-right" aria-label="Jalan kanan" title="Kanan">▶</button>
+    </div>
+
+    <!-- Right side: action buttons -->
+    <div class="touch-actions">
+      <button class="touch-btn touch-btn--interact" id="btn-interact" aria-label="Interaksi / Bicara NPC" title="Interaksi (E)">💬</button>
+      <button class="touch-btn touch-btn--jump"     id="btn-jump"     aria-label="Lompat" title="Lompat (Space)">↑</button>
+    </div>
+  </div>
+
+  <!--
+    Game entry point — ES module.
+    All game systems imported from ./scripts/*.js
+  -->
+  <script type="module" src="game.js"></script>
+
+  <!-- Hide loading screen once the module has loaded -->
+  <script>
+    // The loading bar animation runs for ~1.4s (CSS).
+    // Hide the overlay after 1.6s to allow the animation to finish.
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const ls = document.getElementById('loadingScreen');
+        if (ls) {
+          ls.classList.add('hidden');
+          // Remove from DOM after transition
+          ls.addEventListener('transitionend', () => ls.remove(), { once: true });
+        }
+      }, 1600);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,869 @@
+/* =========================================================
+   FAMOSDA — style.css
+   Skema warna: ungu (utama) + oranye & ungu muda (aksen)
+   Semua warna diatur lewat CSS variables di :root supaya
+   gampang diubah dari satu tempat kalau kamu mau ganti nuansa.
+   ========================================================= */
+
+:root{
+  --purple-900:#2c1f63;
+  --purple-700:#5b3fd9;
+  --purple-600:#6c4fe0;
+  --purple-500:#8567ef;
+  --purple-200:#e3d9fb;
+  --purple-100:#f1ecfd;
+  --orange-500:#e8823c;
+  --orange-400:#f0954f;
+  --peach-300:#f8d6a4;
+  --ink-900:#211a3d;
+  --ink-700:#4a3f72;
+  --ink-500:#786f9c;
+  --paper:#fbfaff;
+  --radius-lg:22px;
+  --radius-md:14px;
+  --shadow-hard:8px 8px 0 var(--ink-900);
+  --shadow-hard-sm:6px 6px 0 var(--ink-900);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans', system-ui, sans-serif;
+  color:var(--ink-900);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,.logo-text,.btn{font-family:'Space Grotesk', 'Plus Jakarta Sans', sans-serif;}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+section{scroll-margin-top:96px;}
+.wrap{max-width:1240px; margin:0 auto; padding:0 24px;}
+
+/* ---------- Header ---------- */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:linear-gradient(135deg, var(--purple-600), var(--purple-900));
+  padding:14px 0;
+}
+.header-inner{
+  max-width:1240px; margin:0 auto; padding:0 24px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+}
+.logo{display:flex; align-items:center; gap:12px; flex-shrink:0;}
+.logo-avatar{
+  width:46px; height:46px; border-radius:50%;
+  background:var(--peach-300); flex-shrink:0;
+}
+.logo-text{
+  color:#fff; font-weight:700; font-style:italic; font-size:1.5rem; letter-spacing:-0.01em;
+}
+
+.main-nav{display:flex; align-items:center; gap:34px;}
+.nav-link{
+  position:relative;
+  color:rgba(255,255,255,0.88); font-weight:600; font-size:1rem;
+  padding:6px 4px; border-bottom:2px solid transparent; white-space:nowrap;
+  border-radius:8px; transition:background .2s ease, color .2s ease;
+}
+.nav-link:hover, .nav-link.active{color:#fff; border-bottom-color:#fff;}
+/* Efek highlight singkat saat menu ditekan (lihat script.js) */
+.nav-link.pressed{background:rgba(255,255,255,0.22);}
+
+.header-actions{display:flex; align-items:center; gap:12px; flex-shrink:0;}
+.header-dropdown{position:relative; display:flex;}
+.icon-btn{
+  width:42px; height:42px; border:none; border-radius:12px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .15s ease, background-color .18s ease, color .18s ease;
+}
+.icon-btn:hover{transform:translateY(-1px);}
+.icon-btn--accent{background:var(--purple-200); color:var(--ink-900);}
+/* Saat panel musik terbuka (aria-expanded diatur otomatis oleh script.js):
+   background jadi ungu solid, ikon jadi putih. Sebelum diklik, tetap seperti semula. */
+.icon-btn--accent[aria-expanded="true"]{background:var(--purple-600); color:#fff;}
+.icon-btn--dark{background:#ffffff; color:var(--purple-700);}
+/* Saat panel game terbuka (aria-expanded diatur otomatis oleh script.js):
+   background jadi ungu solid, ikon jadi putih. */
+.icon-btn--dark[aria-expanded="true"]{background:var(--purple-600); color:#fff;}
+
+/* ---------- Dropdown navbar: Musik & Game ---------- */
+.dropdown-panel{
+  position:absolute; top:calc(100% + 12px); right:-6px;
+  width:260px; max-width:calc(100vw - 32px);
+  background:#fff; border-radius:16px; padding:16px;
+  box-shadow:0 16px 34px rgba(33, 26, 61, 0.22);
+  opacity:0; visibility:hidden; transform:translateY(-8px);
+  transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
+  z-index:60;
+}
+.dropdown-panel.open{opacity:1; visibility:visible; transform:translateY(0);}
+.dropdown-title{
+  margin:0 0 12px; font-size:0.78rem; font-weight:700; color:var(--ink-500);
+  text-transform:uppercase; letter-spacing:0.06em;
+}
+.song-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+.song-item{
+  display:flex; align-items:center; gap:10px; padding:8px 10px;
+  border-radius:10px; background:var(--purple-100);
+}
+.song-play{
+  width:32px; height:32px; border:none; border-radius:50%; flex-shrink:0;
+  background:var(--purple-600); color:#fff; cursor:pointer;
+  font-size:0.8rem; line-height:1; display:flex; align-items:center; justify-content:center;
+  transition:background .15s ease;
+}
+.song-play.playing{background:var(--orange-500);}
+.song-name{font-size:0.88rem; font-weight:600; color:var(--ink-900);}
+
+.game-modes{display:flex; flex-direction:column; gap:8px;}
+.game-mode{
+  display:flex; align-items:center; gap:10px; padding:10px 12px;
+  border-radius:10px; background:var(--purple-100); color:var(--ink-900);
+  font-weight:600; font-size:0.88rem; transition:background .15s ease;
+}
+.game-mode:hover{background:var(--purple-200);}
+.game-mode-icon{font-size:1.1rem;}
+.menu-toggle{
+  display:none; width:42px; height:42px; border:none; border-radius:12px;
+  background:rgba(255,255,255,0.15); cursor:pointer;
+  flex-direction:column; align-items:center; justify-content:center; gap:5px;
+}
+.menu-toggle span{width:20px; height:2px; background:#fff; border-radius:2px; transition:transform .2s, opacity .2s;}
+.menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.menu-toggle.open span:nth-child(2){opacity:0;}
+.menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ---------- Hero ---------- */
+.hero{padding:56px 0 72px;}
+.hero-box{
+  max-width:1240px; margin:0 auto; padding:88px 24px;
+  background:linear-gradient(160deg, var(--purple-900), #1c1440);
+  border-radius:28px;
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:34px;
+}
+.hero-title{
+  margin:0; color:#fff; font-weight:700; font-style:italic;
+  font-size:clamp(3rem, 9vw, 6.5rem); letter-spacing:-0.02em; line-height:0.95;
+}
+.hero-subtitle{
+  margin:-14px 0 0; max-width:560px; color:rgba(255,255,255,0.72);
+  font-size:1.05rem; line-height:1.6;
+}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:1.05rem; border:none; cursor:pointer;
+  border-radius:14px; padding:18px 46px; transition:transform .15s ease;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:var(--orange-500); color:#fff;}
+
+/* ---------- Section heading ---------- */
+.section-eyebrow{
+  font-weight:700; 
+  color:var(--purple-600);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  font-size:0.8rem; 
+  margin:0 0 8px;
+}
+.section-title{
+  margin:0 0 10px;
+  font-size:clamp(1.8rem, 4vw, 2.6rem); 
+  font-weight:700;
+}
+.section-lead{
+  margin:0 0 40px; 
+  color:var(--ink-500);
+  max-width:560px; 
+  font-size:1.02rem;
+  line-height:1.6;
+}
+
+/* ---------- About ---------- */
+.about-section{
+  padding:80px 0;
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:44px;
+  align-items:start;
+}
+
+.polaroid{
+  position:relative;
+  width:100%;
+  max-width: 360px;
+  max-width:none;
+}
+
+.polaroid-shadow{
+  position:absolute;
+  inset:10px -10px -10px 10px;
+  background:#000;
+  border-radius:0;
+}
+
+.polaroid-card{
+  position:relative;
+  background:var(--purple-100);
+  border-radius:0;
+  aspect-ratio:1 / 1;
+  overflow:hidden;
+  border:3px solid rgba(0,0,0,0.05);
+}
+
+.polaroid-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  margin:auto;
+  width:30%;
+  height:30%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a493e0' stroke-width='1.6'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Ccircle cx='9' cy='11' r='2'/%3E%3Cpath d='M21 16l-5-5-4 4-3-3-6 6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  opacity:0.55;
+  pointer-events:none;
+}
+
+.polaroid-card img{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Susunan kotak About Us */
+.about-blocks{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 80px;
+  grid-template-rows:auto auto;
+  gap:80px;
+  align-items:center;
+  transform: translateY(50px);
+}
+
+.about-block{
+  border-radius:14px;
+  padding:22px 28px;
+  color:#fff;
+  font-weight:600;
+}
+
+.about-block--green{
+  display: none;
+  grid-column:1 / -1;
+  background:#ffff;
+  min-height:130px;
+}
+
+.about-block--pink{
+  grid-column:1;
+  background:#db9a9d;
+}
+
+.about-block--sky{
+  grid-column:2;
+  width:80px;
+  height:80px;
+  padding:0;
+  background:#5d8ecb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.about-block--link{
+  cursor:pointer;
+  transition:transform .15s ease, opacity .15s ease;
+}
+
+.about-block--link:hover{
+  transform:translateY(-2px);
+  opacity:0.92;
+}
+/* ---------- Teacher ---------- */
+.teacher-section{
+  padding:60px 0 100px;
+  background:var(--purple-100);
+}
+.teacher-grid{
+  display:grid; 
+  grid-template-columns:1fr 1fr;
+  gap:44px; 
+  align-items:start; 
+  padding-top:20px;
+}
+.teacher-blocks{
+  display:flex; 
+  flex-direction:column;
+  gap:18px;
+}
+.teacher-block{
+  border-radius:var(--radius-md); 
+  padding:34px 28px;
+  color:#fff; 
+  font-weight:700; 
+  font-size:1.1rem;
+}
+.teacher-block--orange{
+  background:var(--orange-500);
+}
+.teacher-block--olive{
+  background:var(--purple-600);
+  min-height:150px;
+}
+
+/* ---------- Students / Content grid ---------- */
+.students-section{padding:80px 0 100px;}
+.search-wrap{
+  position:relative; 
+  max-width:100%; 
+  margin-bottom:36px;
+}
+.search-wrap input{
+  width:100%; 
+  padding:16px 52px 16px 20px;
+  border-radius:14px;
+  border:2px solid var(--purple-700); 
+  font-size:1rem; 
+  font-family:inherit;
+  background:#eceaf5; 
+  color:var(--ink-900);
+}
+.search-wrap input:focus{
+  outline:3px solid var(--purple-500); 
+  outline-offset:2px;
+}
+.search-wrap svg{
+  position:absolute; 
+  right:18px;
+  top:50%; 
+  transform:translateY(-50%);
+  width:20px; 
+  height:20px; 
+  stroke:var(--ink-700); 
+  pointer-events:none;
+}
+
+/* Grid responsive murni CSS Grid: kolom otomatis menyesuaikan lebar layar */
+.content-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+  gap:22px;
+}
+.content-card{
+  border-radius:var(--radius-md); 
+  overflow:hidden;
+  background:var(--purple-100);
+  aspect-ratio:3/4; 
+  position:relative;
+}
+/* Placeholder kotak seragam + ikon foto samar (murni CSS, tidak perlu file gambar).
+   Begitu <img class="content-image"> berisi foto asli dan berhasil dimuat,
+   foto akan menutupi ikon ini sepenuhnya karena object-fit: cover. */
+.content-card::before{
+  content:'';
+  position:absolute; 
+  inset:0; 
+  margin:auto; 
+  width:38%; 
+  height:38%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a493e0' stroke-width='1.6'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Ccircle cx='9' cy='11' r='2'/%3E%3Cpath d='M21 16l-5-5-4 4-3-3-6 6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; 
+  background-position:center; 
+  background-size:contain;
+  opacity:0.55; 
+  pointer-events:none;
+}
+.content-image{
+  position:relative; 
+  z-index:1;
+  width:100%;
+  height:100%; 
+  object-fit:cover;
+  display:block;
+}
+.content-caption{
+  position:absolute;
+  left:0; 
+  right:0; 
+  bottom:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+  color:#fff; 
+  font-weight:600; 
+  font-size:0.85rem;
+  padding:26px 12px 10px;
+  text-align:center;
+}
+.no-results{
+  display:none; 
+  color:var(--ink-500);
+  font-weight:600; 
+  padding:20px 0;
+}
+.no-results.show{display:block;}
+
+/* Kartu siswa bisa diklik -> buka Modal Detail Siswa (lihat script.js).
+   Discope ke #contentGrid supaya kartu Moments (juga pakai .content-card)
+   tidak ikut berubah tampilannya. */
+#contentGrid .content-card{
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+#contentGrid .content-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 24px rgba(33, 26, 61, 0.2);
+}
+#contentGrid .content-card:focus-visible{
+  outline:3px solid var(--purple-500);
+  outline-offset:3px;
+}
+
+/* ---------- Moments (carousel foto & video — mode fokus di tengah) ---------- */
+.moments-section{padding:80px 0 100px; background:var(--purple-100);}
+.moments-carousel{width:100%;}
+
+/* "Panggung" carousel: bungkus viewport + tombol panah dalam satu area relatif,
+   supaya panah bisa tumpang tindih (overlap) di atas frame media yang aktif
+   dan tetap diam di tempat walau track-nya di-scroll/swipe.
+   --active-width mengatur lebar frame yang sedang aktif/fokus di tengah, dalam
+   PERSEN (unit relatif) supaya otomatis mengecil/membesar mengikuti lebar layar.
+   Nilai default di sini berlaku untuk desktop — makin kecil persennya, makin
+   banyak frame lain yang ikut "mengintip" di kiri-kanan sekaligus. Tablet &
+   mobile menimpa nilai ini lewat media query di bagian responsive di bawah. */
+.carousel-stage{
+  position:relative;
+  --active-width:48%; /* desktop: ±3 frame terlihat sekaligus (1 aktif + intip kiri-kanan) */
+}
+
+/* Area yang bisa discroll/swipe — panah & drag jari sama-sama jalan lewat elemen ini.
+   padding kiri-kanan dihitung dari --active-width supaya item pertama & terakhir
+   tetap bisa berhenti tepat di tengah panggung saat digeser. */
+.carousel-viewport{
+  overflow-x:auto; 
+  scroll-behavior:smooth;
+  scroll-snap-type:x mandatory; 
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none; /* Firefox: sembunyikan scrollbar */
+  padding:6px calc((100% - var(--active-width)) / 2);
+}
+.carousel-viewport::-webkit-scrollbar{display:none;} /* Chrome/Safari: sembunyikan scrollbar */
+
+.carousel-track{display:flex; align-items:center; gap:22px;}
+.moment-item{
+  scroll-snap-align:center;
+  min-width:0;
+  flex:0 0 var(--active-width);
+  /* max-width membatasi lebar frame agar tidak membesar berlebihan di layar
+     ultra-lebar — pelengkap dari flex-basis persen di atas supaya frame tetap
+     proporsional pada lebar layar berapa pun. */
+  max-width:620px;
+  /* Item yang sedang tidak aktif dibuat blur + redup supaya item di tengah
+     terlihat menonjol. Transisi halus dipakai supaya perpindahan antar item
+     (saat panah diklik atau di-swipe) terasa smooth, bukan berubah tiba-tiba. */
+  opacity:0.42;
+  filter:blur(3px);
+  transform:scale(0.9);
+  transition:opacity .45s ease, filter .45s ease, transform .45s ease;
+}
+/* Kelas .is-active ditambahkan otomatis oleh script.js pada item yang sedang
+   berada di tengah panggung (hasil pantauan posisi scroll). */
+.moment-item.is-active{
+  opacity:1;
+  filter:blur(0);
+  transform:scale(1);
+}
+.moment-card{
+  position:relative;
+  aspect-ratio:16/9;
+}
+.moment-badge{
+  position:absolute; 
+  top:10px; 
+  left:10px; 
+  z-index:2;
+  background:var(--orange-500);
+  color:#fff; 
+  font-weight:700; 
+  font-size:0.72rem;
+  padding:5px 10px;
+  border-radius:999px; 
+  display:flex; 
+  align-items:center; 
+  gap:4px;
+  pointer-events:none;
+}
+
+/* Tombol panah kiri/kanan — posisi absolute, rata tengah vertikal, dan tetap
+   diam saat track di-scroll (karena bukan anak dari .carousel-viewport,
+   melainkan dari .carousel-stage).
+   Posisi kiri/kanannya PUNYA DUA KEADAAN:
+   1) Standar (aktif/bisa diklik) → tumpang tindih sedikit di atas tepi frame
+      yang sedang fokus, dipakai selama masih ada item sebelum/sesudahnya.
+   2) Disabled (di slide pertama/terakhir) → otomatis geser ke luar, masuk ke
+      area gutter kosong di sisi kiri/kanan, supaya TIDAK menimpa foto/video
+      pertama atau terakhir. Lihat aturan :disabled di bawah. */
+.carousel-arrow{
+  position:absolute;
+  top:50%; 
+  transform:translateY(-50%);
+  width:58px; 
+  height:58px;
+  border:none; 
+  border-radius:50%;
+  background:var(--purple-600);
+  color:#fff; 
+  cursor:pointer;
+  display:flex; 
+  align-items:center;
+  justify-content:center;
+  z-index:5;
+  /* Drop shadow ganda: lembut & lebar untuk elevasi, tegas & dekat untuk kontras,
+     supaya tombol tetap jelas terlihat di atas foto/video apa pun warnanya,
+     maupun saat berada di atas gutter kosong. */
+  box-shadow:0 10px 24px rgba(33,26,61,0.4), 0 2px 8px rgba(33,26,61,0.3);
+  transition:left .3s ease, right .3s ease, transform .15s ease,
+             background-color .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.carousel-arrow:hover:not(:disabled){
+  background:var(--purple-700); transform:translateY(-50%) scale(1.06);
+}
+/* Slide pertama/terakhir: tombol nonaktif, tetap terlihat jelas (tidak pudar
+   habis) tapi geser ke gutter kiri/kanan lewat aturan --prev/--next:disabled
+   di bawah, supaya jelas tidak menimpa foto/video. */
+.carousel-arrow:disabled{cursor:not-allowed; opacity:0.85; box-shadow:0 6px 16px rgba(33,26,61,0.28);}
+
+/* Posisi standar (bisa diklik): overlap tipis di tepi dalam frame aktif */
+.carousel-arrow--prev{left:calc((100% - var(--active-width)) / 2 + 14px);}
+.carousel-arrow--next{right:calc((100% - var(--active-width)) / 2 + 14px);}
+/* Posisi disabled (slide pertama/terakhir): pindah ke gutter, di luar frame */
+.carousel-arrow--prev:disabled{left:8px;}
+.carousel-arrow--next:disabled{right:8px;}
+/* Video mengisi kotak sama seperti foto (object-fit:cover lewat .content-image) */
+video.content-image{background:var(--ink-900);}
+
+/* Titik indikator halaman di bawah carousel (dibuat otomatis oleh script.js) */
+.carousel-dots{
+  display:flex; 
+  justify-content:center;
+  gap:8px; 
+  margin-top:26px;
+}
+.carousel-dot{
+  width:9px; 
+  height:9px; 
+  padding:0; 
+  border:none; 
+  border-radius:50%;
+  background:var(--purple-200);
+  cursor:pointer;
+  transition:background-color .15s ease, transform .15s ease;
+}
+.carousel-dot.active{background:var(--purple-600); transform:scale(1.3);}
+
+/* ---------- Footer ---------- */
+.site-footer{
+  background:var(--purple-900);
+  color:rgba(255,255,255,0.6);
+  padding:36px 0; 
+  text-align:center; 
+  font-size:0.9rem;
+}
+.site-footer strong{color:#fff;}
+
+/* ---------- Modal Sambutan (custom, bukan alert bawaan) ---------- */
+.modal-overlay{
+  position:fixed;
+  inset:0; 
+  z-index:100;
+  background:rgba(30, 30, 35, 0.45);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px); /* dukungan Safari */
+  display:flex; 
+  padding:32px 16px;
+  /* BUG FIX: sebelumnya pakai align-items:center + justify-content:center
+     tanpa overflow — kalau tinggi modal-box melebihi tinggi layar (HP
+     landscape, layar pendek, dsb), bagian atas & bawahnya ke-crop di luar
+     viewport dan TIDAK BISA dijangkau sama sekali (ini penyebab bug di
+     screenshot). Sekarang overlay-nya bisa di-scroll, dan modal-box
+     di-center pakai margin:auto (bukan align/justify-content) — cara ini
+     yang bikin overflow-nya benar-benar bisa di-scroll penuh sampai ujung
+     paling atas di semua browser. */
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  opacity:0; 
+  visibility:hidden;
+  transition:opacity .2s ease, visibility .2s ease;
+}
+.modal-overlay.open{opacity:1; visibility:visible;}
+.modal-box{
+  position:relative; width:100%; max-width:360px;
+  margin:auto; /* center horizontal & vertikal, sekaligus scroll-friendly (lihat catatan di .modal-overlay) */
+  background:#fff; border-radius:22px; padding:28px 24px 24px;
+  text-align:center; box-shadow:0 24px 60px rgba(33, 26, 61, 0.35);
+  transform:translateY(14px); transition:transform .2s ease;
+}
+.modal-overlay.open .modal-box{transform:translateY(0);}
+.modal-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:32px; 
+  height:32px;
+  border:none; 
+  border-radius:50%; 
+  background:var(--purple-100); color:var(--ink-700);
+  font-size:1.2rem; 
+  line-height:1; 
+  cursor:pointer;
+  display:flex; 
+  align-items:center;
+  justify-content:center;
+}
+.modal-close:hover{
+  background:var(--purple-200);
+}
+.modal-image-wrap{
+  position:relative; 
+  width:100%; 
+  aspect-ratio:4/3; 
+  margin-bottom:18px;
+  border-radius:16px;
+  overflow:hidden;
+  background:var(--purple-100);
+}
+.modal-image-wrap::before{
+  content:'';
+  position:absolute; 
+  inset:0; 
+  margin:auto; 
+  width:32%; 
+  height:32%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a493e0' stroke-width='1.6'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Ccircle cx='9' cy='11' r='2'/%3E%3Cpath d='M21 16l-5-5-4 4-3-3-6 6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; 
+  background-position:center; 
+  background-size:contain;
+  opacity:0.55; pointer-events:none;
+}
+.modal-image{
+  position:relative; 
+  z-index:1; 
+  width:100%;
+  height:100%; 
+  object-fit:cover;
+  display:block;
+}
+.modal-title{
+  margin:0 0 8px; 
+  font-size:1.3rem; 
+  font-weight:700;
+  color:var(--ink-900);
+}
+.modal-text{
+  margin:0 0 22px; 
+  color:var(--ink-500); 
+  font-size:0.95rem; 
+  line-height:1.5;
+}
+.modal-ok{
+  width:100%; 
+  padding:14px 20px;
+}
+
+/* ---------- Modal Detail Siswa (1 modal, isi diganti dinamis oleh script.js) ---------- */
+.modal-box--student{
+  max-width:480px; /* Desktop/monitor: cukup lebar buat 3 foto sejajar tanpa terasa sempit */
+  text-align:left;
+}
+
+/* Galeri 3 foto: Foto 1 (utama/profil), Foto 2 & 3 (momen/bebas).
+   Default (Desktop/Monitor): 3 SLOT SEJAJAR HORIZONTAL dalam 3 kolom sama
+   lebar. Ketiga slot pakai KELAS BERSAMA .gallery-slot supaya rasio, radius,
+   dan placeholder-nya konsisten — jadi foto asli siswa yang beda-beda
+   ukurannya (portrait/landscape/square) tetap dipotong rapi & seragam.
+   Layout ini berubah lagi khusus di Mobile Mode, lihat @media (max-width:520px). */
+.student-gallery{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+/* ===== Slot foto (dipakai di 3 tempat: utama + 2 momen) =====
+   aspect-ratio TETAP/konsisten di ketiga slot supaya tinggi kotak selalu
+   proporsional terhadap lebarnya, apa pun rasio asli foto yang dimasukkan.
+   Kalau mau ganti rasio (mis. 3/4), cukup ubah nilai --gallery-ratio ini saja. */
+.gallery-slot{
+  --gallery-ratio: 4/5;
+  position:relative;
+  aspect-ratio:var(--gallery-ratio);
+  border-radius:16px;
+  overflow:hidden;
+  /* Placeholder abu-abu netral: tampil rapi selama data-imgN kosong/foto
+     belum dimuat, tanpa merusak layout (ukuran kotak tetap terkunci oleh
+     aspect-ratio di atas, cuma <img>-nya yang disembunyikan lewat JS). */
+  background:#e7e7ec;
+}
+
+/* Ikon foto placeholder abu-abu, otomatis ketutup begitu data-imgN diisi
+   dan gambar berhasil dimuat (lihat fillStudentImage() di script.js). */
+.gallery-slot::before{
+  content:'';
+  position:absolute; 
+  inset:0; 
+  margin:auto;
+  width:28%; 
+  height:28%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b3b3bd' stroke-width='1.6'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Ccircle cx='9' cy='11' r='2'/%3E%3Cpath d='M21 16l-5-5-4 4-3-3-6 6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; 
+  background-position:center; 
+  background-size:contain;
+  opacity:0.8; 
+  pointer-events:none;
+}
+/* Foto WAJIB object-fit:cover + object-position:center: mengisi penuh kotak,
+   terpotong (crop) rapi di tengah, dan tidak gepeng/distorsi berapa pun
+   rasio asli foto yang diunggah (portrait, landscape, atau square). */
+.gallery-slot img{
+  position:relative; 
+  z-index:1;
+  width:100%; 
+  height:100%; 
+  object-fit:cover; 
+  object-position:center;
+  display:block;
+}
+
+/* Kotak kesan & pesan, gaya bubble kutipan */
+.student-quote{
+  position:relative;
+  margin:0 0 16px;
+  padding:16px 18px;
+  background:var(--purple-100);
+  border-radius:14px;
+  color:var(--ink-700);
+  font-style:italic;
+  font-size:0.95rem;
+  line-height:1.55;
+}
+.student-quote.is-empty{color:var(--ink-500);}
+
+.student-name{
+  margin:0;
+  font-size:1.3rem;
+  font-weight:700;
+  color:var(--ink-900);
+  text-align:center;
+}
+
+/* ---------- Responsive (Flexbox header + CSS Grid grid konten) ---------- */
+@media (max-width:860px){
+  .about-grid,
+  .teacher-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-blocks{
+    grid-template-columns:1fr 70px;
+  }
+
+  .about-block--sky{
+    width:70px;
+    height:70px;
+  }
+}
+@media (max-width:760px){
+  .main-nav{
+    position:absolute; 
+    top:100%; left:0; 
+    right:0;
+    background:#ffffff;
+    flex-direction:column; 
+    align-items:flex-start;
+    gap:0; 
+    padding:0 24px; 
+    max-height:0; 
+    overflow:hidden;
+    transition:max-height .25s ease, padding .25s ease;
+    border-radius:0 0 18px 18px;
+    pointer-events:none;
+  }
+  .main-nav.open{
+    max-height:320px; 
+    padding:14px 24px 18px;
+    box-shadow:0 14px 28px rgba(33, 26, 61, 0.18);
+    pointer-events:auto;
+  }
+  .main-nav .nav-link{
+    width:100%; 
+    padding:12px 4px; 
+    border-bottom:1px solid rgba(108, 79, 224, 0.15);
+    color:var(--purple-700);
+    border-radius:0;
+  }
+  .main-nav .nav-link:hover,
+  .main-nav .nav-link.active{
+    color:var(--purple-900); 
+    border-bottom-color:var(--purple-700);
+  }
+  .main-nav .nav-link.pressed{background:var(--purple-100); 
+  border-radius:8px;}
+  .menu-toggle{display:flex;}
+  .hero-box{padding:56px 20px;}
+  .content-grid{grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));}
+
+  /* Dropdown Musik & Game: dipusatkan & dikunci ke viewport supaya
+     tidak terpotong di layar sempit, apa pun posisi tombolnya */
+  .dropdown-panel{
+    position:fixed; 
+    top:80px; 
+    left:50%; 
+    right:auto;
+    width:min(300px, calc(100vw - 32px));
+    transform:translate(-50%, -8px);
+  }
+  .dropdown-panel.open{transform:translate(-50%, 0);}
+
+  /* Moments: panah sedikit lebih kecil di layar sempit, tapi tetap besar & mudah dipencet */
+  .carousel-arrow{width:48px; height:48px;}
+}
+
+/* Tablet Mode (768px ke bawah) — Modal Detail Siswa:
+   ukuran modal menyesuaikan lebar layar (90%, bukan lebar tetap), padding
+   dikecilkan, dan font quote disesuaikan. Galeri tetap 3 kolom sejajar
+   seperti Desktop karena masih cukup lega di lebar ini.
+   PENTING: block ini sengaja ditaruh SEBELUM @media (max-width:520px) di
+   bawah — di layar HP (<=520px) kedua breakpoint ini aktif bersamaan, jadi
+   urutannya menentukan siapa yang menang; aturan Mobile Mode yang
+   ditulis belakangan akan menimpa aturan di sini. */
+@media (max-width:768px){
+  .modal-box--student{
+    width:90%;
+    max-width:600px;
+    padding:20px 18px 18px;
+  }
+  .student-quote{font-size:0.9rem;}
+}
+
+/* --- PERBAIKAN TOMBOL PANAH CAROUSEL DI MOBILE --- */
+@media (max-width:520px){
+  .carousel-stage{--active-width:82%;}
+  .moment-item{max-width:380px;}
+  .carousel-arrow{width:40px; height:40px;}
+  .carousel-arrow--prev{left: 4px;}
+  .carousel-arrow--next{right: 4px;}
+  
+  .student-gallery{grid-template-columns:repeat(2, 1fr); gap:8px; margin-bottom:14px;}
+  .gallery-slot--main{grid-column:1 / -1;}
+  .gallery-slot{--gallery-ratio:1/1;}
+
+  .modal-box--student{padding:18px 14px 14px;}
+  .student-quote{padding:12px 14px; font-size:0.85rem; margin-bottom:12px;}
+  .student-name{font-size:1.1rem;}
+}
