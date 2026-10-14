@@ -93,7 +93,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('image/foto1.jpg');
+    background-image: url('foto1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
