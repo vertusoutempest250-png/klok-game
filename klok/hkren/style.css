@@ -1,0 +1,461 @@
+:root {
+
+    --primary-color: #0876BF;
+    --secondary-color: #3846ff;
+    --blue-color: #0A50FF;
+    --telur-color: hsl(44, 100%, 52%);
+    --bg-color: #f5f5f5;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Archivo Black', 'Poppins', sans-serif;
+    background: var(--bg-color);
+    color: #333;
+    
+    
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Navbar */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 7%;
+    background-color: var(--primary-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 0 0 1rem 1rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.navbar .logo-avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
+    flex-shrink: 0;
+}
+
+.navbar .logo-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.navbar .logo-text {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    font-style: italic;
+}
+
+
+.navbar .navbar-nav a {
+    color: #fff;
+    display: inline-block;
+    font-size: 1.4rem;
+    margin-left: 2rem;
+    transition: all 0.3s ease;
+}
+
+.navbar .navbar-nav a:hover {
+    color: var(--telur-color);
+}
+
+.navbar .navbar-nav a::after{
+    content: '';
+    display: block;
+    padding: 0.5rem;
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.8);
+    transform: scaleX(0);
+    
+}
+.navbar .navbar-nav a:hover::after {
+    transform: scaleX(1);
+    transition: transform 0.3s linear;
+}
+
+.navbar .navbar-extra a {
+    color: #ffff;
+    margin: 0 0.5rem;
+}
+.navbar .navbar-extra a:hover {
+    color: var(--telur-color);
+    
+}
+
+#hamburger-menu {
+    display: none;
+    
+}
+
+/* Section (Home / Hero) */
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* teks di area langit (atas), wajah di foto tidak tertutup */
+    background-image: url('image/foto1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    min-height: 100svh;
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+/* Lapisan 1: gradasi gelap di atas (untuk teks), terang di tengah (wajah), menyatu ke section berikutnya */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(5, 22, 42, 0.78) 0%,
+        rgba(5, 22, 42, 0.45) 35%,
+        rgba(5, 22, 42, 0.10) 62%,
+        rgba(5, 22, 42, 0.10) 86%,
+        var(--bg-color) 100%
+    );
+    pointer-events: none;
+}
+
+/* Lapisan 2: titik-titik, hanya di bagian atas dan memudar sebelum area wajah */
+.section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.4) 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 45%);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 45%);
+    pointer-events: none;
+}
+
+.section-content {
+    padding: 10.5rem 5% 2.4rem; /* ruang untuk navbar fixed */
+    max-width: 80rem;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(3.6rem, 9vw, 6rem);
+    color: var(--telur-color);
+    text-shadow: 0 0.2rem 0 rgba(0, 0, 0, 0.35), 0 0.4rem 1.8rem rgba(0, 0, 0, 0.55);
+    line-height: 1.1;
+    font-weight: 400; /* Archivo Black hanya punya 1 weight; 700 bikin faux-bold */
+    margin-bottom: 1.2rem;
+    text-wrap: balance;
+}
+
+.section-span {
+    display: block;
+    font-size: 1.2em;
+    color: var(--telur-color);
+}
+
+.section-description {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    max-width: 32ch;
+    margin: 0 auto 2.8rem;
+    font-weight: 500;
+    color: #fff;
+    text-shadow: 0 0.1rem 0.8rem rgba(0, 0, 0, 0.75);
+}
+
+.section .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 44px; /* target sentuh minimal di HP */
+    padding: 1.1rem 2.8rem;
+    background-color: var(--telur-color);
+    color: #1b1b1b;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0.3rem 0.3rem 0 var(--primary-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section .cta svg {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.section .cta:hover {
+    transform: translate(-0.15rem, -0.15rem);
+    box-shadow: 0.45rem 0.45rem 0 var(--primary-color);
+}
+
+.section .cta:active {
+    transform: translate(0.2rem, 0.2rem);
+    box-shadow: 0.1rem 0.1rem 0 var(--primary-color);
+}
+
+.section .cta:focus-visible {
+    outline: 0.3rem solid #fff;
+    outline-offset: 0.3rem;
+}
+
+/* Layar lebar: tampilkan lebih banyak langit supaya teks tidak menimpa wajah */
+@media (min-width: 769px) {
+    .section {
+        background-position: center top;
+    }
+}
+
+/* HP landscape: layar pendek, rapatkan jarak */
+@media (max-height: 480px) and (orientation: landscape) {
+    .section-content {
+        padding-top: 8rem;
+    }
+    .section-description {
+        margin-bottom: 1.6rem;
+    }
+}
+
+/* ================= ABOUT SECTION ================= */
+.section-about {
+    min-height: 100vh;
+    padding: 9.5rem 7% 5rem;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+}
+
+.container-about {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Judul About Us (Highlight Blok Warna) --- */
+.about-title-wrapper {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.about-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 3rem;
+    display: inline-flex;
+    position: relative;
+}
+
+.about-title .highlight-1 {
+    background-color: #e3a5db; /* Warna blok merah muda/ungu */
+    color: #4a4a4a;
+    padding: 0.2rem 1rem;
+    transform: rotate(-2deg);
+    z-index: 1;
+}
+
+.about-title .highlight-2{
+    background-color: #5ce1e6; /* Warna blok biru/toska */
+    color: #4a4a4a;
+    padding: 0.2rem 1rem;
+    margin-left: -0.8rem;
+    transform: rotate(2deg);
+    margin-top: 0.5rem;
+}
+
+/* --- Layout Konten Utama --- */
+.about-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    width: 100%;
+}
+
+/* --- Polaroid & Pin --- */
+.polaroid-wrapper {
+    position: relative;
+    flex: 1;
+    max-width: 450px;
+}
+
+.polaroid-wrapper .pin {
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    font-size: 2.5rem;
+    z-index: 10;
+    transform: rotate(-20deg);
+}
+
+.polaroid-frame {
+    background-color: #ffffff;
+    border: 3px solid #000;
+    padding: 1.5rem 1.5rem 3.5rem 1.5rem;
+    box-shadow: 6px 6px 0px #000;
+}
+
+.polaroid-frame img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #000;
+    display: block;
+}
+
+/* --- Teks Deskripsi & Garis Samping --- */
+.about-text-container {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    gap: 1.5rem;
+}
+
+.accent-line {
+    width: 6px;
+    background-color: #6c5ce7; /* Warna garis tegak */
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.about-description {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+
+
+
+
+/* Media queries */
+
+
+/* Media query for Laptop*/
+@media (max-width: 1366px) {
+    html {
+        font-size: 75%;
+    }
+}
+
+/* Media query for Tablet*/
+@media (max-width: 768px) {
+    html {
+        font-size: 62.5%;
+    }
+    
+    #hamburger-menu{
+        display: inline-block;
+        
+    }
+
+    .navbar .navbar-nav {
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        width: 30rem;
+        background-color: #fff;
+        height: 100vh;
+       
+    }
+
+    .navbar .navbar-nav.active {
+        right: 0;
+        transition: all 0.3s ease;
+    }
+
+    .navbar .navbar-nav a {
+        color: #333;
+        display: block;
+        margin: 1.5rem 0;
+        padding: 0.5rem;
+        font-size: 2rem;
+    }
+
+    .navbar .navbar-nav a::after {
+        transform-origin: 0 0;
+    }
+
+    .navbar .navbar-nav a:hover:after {
+        transform: scaleX(0.3);
+    }
+
+}
+
+/* Media query for Mobile*/
+@media (max-width: 450px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+
+/* --- RESPONSIVE (Tampilan Mobile / HP) --- */
+@media (max-width: 768px) {
+    .about-body {
+        flex-direction: column; /* Mengubah layout jadi memanjang ke bawah di HP */
+        gap: 3rem;
+    }
+
+    .polaroid-wrapper {
+        width: 100%;
+    }
+
+    .about-title {
+        font-size: 2.2rem;
+    }
+
+    .accent-line {
+        background-color: #eccc68; /* Garis berubah warna kuning di layar kecil sesuai sketsa */
+    }
+}
+
+
+
+
+
+
+
+
+
