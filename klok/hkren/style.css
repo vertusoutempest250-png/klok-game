@@ -394,6 +394,7 @@ html {
         position: absolute;
         top: 100%;
         right: -100%;
+        transition: right 0.3s ease; /* animasi juga saat menutup */
         width: 30rem;
         background-color: #fff;
         height: 100vh;
