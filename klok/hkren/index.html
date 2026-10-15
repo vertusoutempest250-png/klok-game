@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famosda</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FEATHER ICONS -->
+      <script src="https://unpkg.com/feather-icons"></script>
+
+
+    <!-- Lucide -->
+        <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!--MY style -->
+    <link rel="stylesheet" href="style(1).css">
+</head>
+<body>
+    
+  <!-- Navbar strart -->
+    <nav class="navbar">
+         <a href="#home" 
+         class="logo">
+        <span class="logo-avatar"> 
+          <img src="image/logo.jpg" alt="logo"></span>
+        <span class="logo-text">Famosda</span></a>
+
+          <div class="navbar-nav">
+            
+                <a href="#home">Home</a>
+                <a href="#About">About Us</a>
+                <a href="#Wali" >Wali Kelas</a>
+                <a href="#Siswa">Siswa</a>
+                <a href="#Album">Album</a>
+           </div>
+
+            <div class="navbar-extra">  
+                <a href="#" id="search" title="cari" aria-label="Cari"><i data-feather="search"></i></a>
+                <a href="#games" id="game" title="Mini Games" aria-label="Mini Games"><i data-lucide="gamepad-2"></i></a>
+                <a href="#" id="hamburger-menu" title="menu" aria-label="Menu"><i data-feather="menu"></i></a>
+
+            </div>
+        
+
+        </nav> 
+
+  <!-- Navbar end -->
+
+
+
+  <!-- Section start -->
+      <section id="home" class="section">
+      <main class="section-content">
+        <div class="container">
+          <h1 class="section-title">Welcome to <span class="section-span">Famosda</span></h1>
+          <p class="section-description">Executive People of Social Two</p>
+          <a href="#About" class="cta">Explore <i data-feather="arrow-down" aria-hidden="true"></i></a>
+        </div>
+      </main>
+      </section>
+  <!-- Section end -->
+
+      <!-- About Section start -->
+      <!-- About Section start -->
+<section id="About" class="section-about">
+  <div class="container-about">
+    
+    <!-- Judul About Us dengan efek highlight blok warna -->
+    <div class="about-title-wrapper">
+      <h2 class="about-title">
+        <span class="highlight-1">About</span>
+        <span class="highlight-2">Us</span>
+      </h2>
+    </div>
+
+    <!-- Konten Utama (Foto Polaroid + Deskripsi) -->
+    <div class="about-body">
+      
+      <!-- Polaroid + Pin -->
+      <div class="polaroid-wrapper">
+        <div class="pin">📌</div>
+        <div class="polaroid-frame">
+          <img src="image/foto2.jpg" alt="About Us" class="about-image">
+        </div>
+      </div>
+
+      <!-- Teks Deskripsi dengan Garis Vertikal -->
+      <div class="about-text-container">
+        <div class="accent-line"></div>
+        <p class="about-description">
+          Famosda is a group of students who are active in social activities and have a strong sense of responsibility. We are committed to making a positive impact in our community and beyond.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- About Section end -->
+
+
+      <!-- About Section end -->
+
+
+    <!-- FEATHER ICONS END -->
+    <script>
+      feather.replace();
+      lucide.createIcons();
+    </script>
+
+    <!-- My Javascript -->
+     <script src="script.js"></script>
+    
+</body>
+</html>
